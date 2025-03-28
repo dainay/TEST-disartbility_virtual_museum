@@ -3,19 +3,20 @@
 public class BlackDropdownMenuHandler : MonoBehaviour
 {
     [SerializeField] private BlackRaycasterManager raycasterManager;
-    [SerializeField] private Camera mainCamera;      // Индивидуальная камера игрока
-    [SerializeField] private Camera dropdownCamera;  // Индивидуальная вторая камера
+    [SerializeField] private Camera mainCamera;      // Основная камера игрока
+    [SerializeField] private Camera dropdownCamera;  // Камера для выпадающего меню
+    [SerializeField] private CanvasGroup[] dropdownCanvasGroups; // Массив CanvasGroup
 
     private bool isDropdownActive = false;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // ЛКМ
+        if (Input.GetMouseButtonDown(0))
         {
             HandleClick();
         }
 
-        if (isDropdownActive && Input.GetKeyDown(KeyCode.X)) // Нажатие "X" для выхода
+        if (isDropdownActive && Input.GetKeyDown(KeyCode.X))
         {
             SwitchToMainCamera();
         }
@@ -29,12 +30,11 @@ public class BlackDropdownMenuHandler : MonoBehaviour
         {
             Debug.Log("🎨 DropPainter clicked: " + hitObject.name);
 
-            // Получаем DropdownMenuHandler с этого объекта
             BlackDropdownMenuHandler handler = hitObject.GetComponent<BlackDropdownMenuHandler>();
 
             if (handler != null)
             {
-                handler.SwitchToDropdownCamera(); // Переключаем именно его камеру
+                handler.SwitchToDropdownCamera();
             }
         }
     }
@@ -46,6 +46,7 @@ public class BlackDropdownMenuHandler : MonoBehaviour
         mainCamera.gameObject.SetActive(false);
         dropdownCamera.gameObject.SetActive(true);
 
+   
         EnableCursor(true);
     }
 
@@ -55,6 +56,8 @@ public class BlackDropdownMenuHandler : MonoBehaviour
 
         mainCamera.gameObject.SetActive(true);
         dropdownCamera.gameObject.SetActive(false);
+
+     
 
         EnableCursor(false);
     }
