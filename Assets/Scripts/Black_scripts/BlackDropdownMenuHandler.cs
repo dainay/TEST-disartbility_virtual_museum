@@ -5,9 +5,20 @@ public class BlackDropdownMenuHandler : MonoBehaviour
     [SerializeField] private BlackRaycasterManager raycasterManager;
     [SerializeField] private Camera mainCamera;      // Основная камера игрока
     [SerializeField] private Camera dropdownCamera;  // Камера для выпадающего меню
-    [SerializeField] private CanvasGroup[] dropdownCanvasGroups; // Массив CanvasGroup
 
+    private CanvasGroup[] allCanvasGroups;
     private bool isDropdownActive = false;
+
+    void Start()
+    {
+        GameObject[] canvasObjects = GameObject.FindGameObjectsWithTag("CanvasPainter");
+        allCanvasGroups = new CanvasGroup[canvasObjects.Length];
+
+        for (int i = 0; i < canvasObjects.Length; i++)
+        {
+            allCanvasGroups[i] = canvasObjects[i].GetComponent<CanvasGroup>();
+        }
+    }
 
     void Update()
     {
@@ -36,6 +47,36 @@ public class BlackDropdownMenuHandler : MonoBehaviour
             {
                 handler.SwitchToDropdownCamera();
             }
+
+            DeactivateAllCanvasGroups();
+
+            // Активируем только нужный дочерний CanvasGroup
+            foreach (Transform child in hitObject.transform)
+            {
+                if (child.CompareTag("CanvasPainter"))
+                {
+                    CanvasGroup cg = child.GetComponent<CanvasGroup>();
+                    if (cg != null)
+                    {
+                        cg.interactable = true;
+                        cg.blocksRaycasts = true;
+                        //cg.alpha = 1f;
+                    }
+                }
+            }
+        }
+    }
+
+    void DeactivateAllCanvasGroups()
+    {
+        foreach (CanvasGroup cg in allCanvasGroups)
+        {
+            if (cg != null)
+            {
+                cg.interactable = false;
+                cg.blocksRaycasts = false;
+                //cg.alpha = 0f;
+            }
         }
     }
 
@@ -46,7 +87,6 @@ public class BlackDropdownMenuHandler : MonoBehaviour
         mainCamera.gameObject.SetActive(false);
         dropdownCamera.gameObject.SetActive(true);
 
-   
         EnableCursor(true);
     }
 
@@ -57,9 +97,21 @@ public class BlackDropdownMenuHandler : MonoBehaviour
         mainCamera.gameObject.SetActive(true);
         dropdownCamera.gameObject.SetActive(false);
 
-     
-
+        ReactivateAllCanvasGroups();
         EnableCursor(false);
+    }
+
+    void ReactivateAllCanvasGroups()
+    {
+        foreach (CanvasGroup cg in allCanvasGroups)
+        {
+            if (cg != null)
+            {
+                cg.interactable = true;
+                cg.blocksRaycasts = true;
+                //cg.alpha = 1f;
+            }
+        }
     }
 
     void EnableCursor(bool enable)

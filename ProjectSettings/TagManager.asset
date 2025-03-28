@@ -9,6 +9,7 @@ TagManager:
   - Basket
   - DropPainter
   - Ball
+  - CanvasPainter
   layers:
   - Default
   - TransparentFX

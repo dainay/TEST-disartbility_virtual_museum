@@ -6920,6 +6920,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas2
       objectReference: {fileID: 0}
+    - target: {fileID: 2609085888969286057, guid: fd7793ee95cc1d94ba7fb152e1447933,
+        type: 3}
+      propertyPath: m_TagString
+      value: CanvasPainter
+      objectReference: {fileID: 0}
     - target: {fileID: 2705473896428131630, guid: fd7793ee95cc1d94ba7fb152e1447933,
         type: 3}
       propertyPath: m_Name
@@ -7589,6 +7594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2609085888969286057, guid: fd7793ee95cc1d94ba7fb152e1447933,
+        type: 3}
+      propertyPath: m_TagString
+      value: CanvasPainter
       objectReference: {fileID: 0}
     - target: {fileID: 2705473896428131630, guid: fd7793ee95cc1d94ba7fb152e1447933,
         type: 3}
