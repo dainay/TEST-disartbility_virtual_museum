@@ -10,6 +10,8 @@ TagManager:
   - DropPainter
   - Ball
   - CanvasPainter
+  - GlassBlack
+  - WinCamera
   layers:
   - Default
   - TransparentFX

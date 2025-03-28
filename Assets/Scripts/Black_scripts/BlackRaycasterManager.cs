@@ -21,11 +21,11 @@ public class BlackRaycasterManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
-            Debug.Log("✅ Raycast hit: " + hit.transform.name);
+            //Debug.Log("✅ Raycast hit: " + hit.transform.name);
             return hit.transform.gameObject; // Return the hit object
         }
 
-        Debug.Log("❌ Raycast found nothing!");
+        //Debug.Log("❌ Raycast found nothing!");
         return null;
     }
 }
