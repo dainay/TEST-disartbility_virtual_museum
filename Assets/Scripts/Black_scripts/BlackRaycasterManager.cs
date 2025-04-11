@@ -17,7 +17,7 @@ public class BlackRaycasterManager : MonoBehaviour
         RaycastHit hit;
 
         // Debug visualization in Scene view
-        Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.yellow, 2f);
+        //Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.yellow, 2f);
 
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
